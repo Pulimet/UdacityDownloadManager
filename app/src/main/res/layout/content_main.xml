@@ -10,6 +10,7 @@
     tools:showIn="@layout/activity_main">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTop"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/bg_top"
@@ -17,6 +18,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/custom_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivTop">
+
+        <RadioButton
+            android:id="@+id/opt1"
+            style="@style/MainRadioButton"
+            android:text="@string/opt1" />
+
+        <RadioButton
+            android:id="@+id/opt2"
+            style="@style/MainRadioButton"
+            android:text="@string/opt2" />
+
+        <RadioButton
+            android:id="@+id/opt3"
+            style="@style/MainRadioButton"
+            android:text="@string/opt3" />
+    </RadioGroup>
 
 
     <com.udacity.LoadingButton
@@ -26,7 +52,7 @@
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
