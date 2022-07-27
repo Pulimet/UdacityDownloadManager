@@ -9,12 +9,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.udacity.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     companion object {
         private const val URL =
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setViewBinding()
         setSupportActionBar(binding.toolbar)
         binding.content.customButton.setOnClickListener(this)
+        binding.content.radioGroup.setOnCheckedChangeListener(this)
     }
 
     override fun onResume() {
@@ -75,6 +78,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.custom_button -> download()
+        }
+    }
+
+    // RadioGroup.OnCheckedChangeListener
+    override fun onCheckedChanged(v: RadioGroup?, id: Int) {
+        when (id) {
+            R.id.opt1 -> Log.d("MyLogs", "Option 1")
+            R.id.opt2 -> Log.d("MyLogs", "Option 2")
+            R.id.opt3 -> Log.d("MyLogs", "Option 3")
         }
     }
 }
