@@ -75,7 +75,6 @@ class LoadingButton @JvmOverloads constructor(
 
     private fun startLoadingAnimation() {
         ValueAnimator.ofInt(0, 101).apply {
-            startDelay = 500
             duration = 4000
             interpolator = DecelerateInterpolator()
             addUpdateListener { valueAnimator ->
