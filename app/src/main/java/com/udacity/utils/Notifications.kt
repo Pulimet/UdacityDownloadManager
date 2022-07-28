@@ -15,35 +15,50 @@ object Notifications {
     private const val NOTIFICATION_ID = 0
     private const val CHANNEL_ID = "channelId"
 
-    fun onDownloadComplete(context: Context, urls: Urls) {
-        val action = NotificationCompat.Action.Builder(
-            R.drawable.ic_download,
-            context.getString(R.string.notification_button),
-            getActionPendingIntent(context)
-        ).build()
+    fun cancelNotification(context: Context) {
+        val notificationManager = context.getSystemService(NotificationManager::class.java)
+        notificationManager.cancel(NOTIFICATION_ID)
+    }
 
+    fun showNotification(context: Context, urls: Urls) {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
-            .setContentTitle(context.getString(R.string.notification_title))
-            .setContentText(context.getString(R.string.notification_description))
+            .setContentTitle(getTitle(context, urls))
+            .setContentText(getText(context, urls))
             .setAutoCancel(true)
-            .addAction(action)
+            .addAction(getAction(context))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }
 
-    private fun getActionPendingIntent(context: Context): PendingIntent {
-        val contentIntent = Intent(context, DetailActivity::class.java)
-        val flag = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        return PendingIntent.getActivity(
-            context,
-            NOTIFICATION_ID,
-            contentIntent,
-            flag
-        )
+    private fun getTitle(context: Context, urls: Urls) = when (urls) {
+        Urls.URL1 -> context.getString(R.string.notification_title1)
+        Urls.URL2 -> context.getString(R.string.notification_title2)
+        Urls.URL3 -> context.getString(R.string.notification_title3)
+        else -> context.getString(R.string.notification_title1)
     }
+
+    private fun getText(context: Context, urls: Urls) = when (urls) {
+        Urls.URL1 -> context.getString(R.string.notification_description1)
+        Urls.URL2 -> context.getString(R.string.notification_description2)
+        Urls.URL3 -> context.getString(R.string.notification_description3)
+        else -> context.getString(R.string.notification_description1)
+    }
+
+    private fun getAction(context: Context) = NotificationCompat.Action.Builder(
+        R.drawable.ic_download,
+        context.getString(R.string.notification_button),
+        getActionPendingIntent(context)
+    ).build()
+
+    private fun getActionPendingIntent(context: Context) = PendingIntent.getActivity(
+        context,
+        NOTIFICATION_ID,
+        Intent(context, DetailActivity::class.java),
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
 
     fun createChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

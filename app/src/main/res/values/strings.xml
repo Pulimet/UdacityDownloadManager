@@ -8,8 +8,12 @@
     <string name="channel_description">Show notification about downloaded files</string>
 
 
-    <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
-    <string name="notification_description">The Project 3 repository is downloaded</string>
+    <string name="notification_title1">BumpTech</string>
+    <string name="notification_title2">Udacity: Android Kotlin Nanodegree</string>
+    <string name="notification_title3">Retrofit</string>
+    <string name="notification_description1">Glide is downloaded</string>
+    <string name="notification_description2">The Project 3 repository is downloaded</string>
+    <string name="notification_description3">Retrofit downloaded</string>
     <string name="notification_button">See changes</string>
 
     <string name="button_name">Click me</string>
