@@ -14,7 +14,7 @@
     <string name="notification_description1">Glide is downloaded</string>
     <string name="notification_description2">The Project 3 repository is downloaded</string>
     <string name="notification_description3">Retrofit downloaded</string>
-    <string name="notification_button">See changes</string>
+    <string name="notification_button">Check the status</string>
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
@@ -25,5 +25,12 @@
     <string name="opt3">Retrofit - Type-safe HTTP client for Android and Java by Square, Inc</string>
     <string name="download">Download</string>
     <string name="select">Please select the file to download</string>
+    <string name="file_name">File name:</string>
+    <string name="status">Status:</string>
+    <string name="success">Success</string>
+    <string name="failed">Failed</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+
 
 </resources>

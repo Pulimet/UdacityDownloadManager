@@ -12,6 +12,8 @@ import com.udacity.DetailActivity
 import com.udacity.R
 
 object Notifications {
+    const val EXTRA_URL = "EXTRA_URL"
+    const val EXTRA_STATUS = "EXTRA_STATUS"
     private const val NOTIFICATION_ID = 0
     private const val CHANNEL_ID = "channelId"
 
@@ -20,13 +22,13 @@ object Notifications {
         notificationManager.cancel(NOTIFICATION_ID)
     }
 
-    fun showNotification(context: Context, urls: Urls) {
+    fun showNotification(context: Context, urls: Urls, status: Int) {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_download)
             .setContentTitle(getTitle(context, urls))
             .setContentText(getText(context, urls))
             .setAutoCancel(true)
-            .addAction(getAction(context))
+            .addAction(getAction(context, urls, status))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
@@ -47,18 +49,20 @@ object Notifications {
         else -> context.getString(R.string.notification_description1)
     }
 
-    private fun getAction(context: Context) = NotificationCompat.Action.Builder(
+    private fun getAction(context: Context, urls: Urls, status: Int) = NotificationCompat.Action.Builder(
         R.drawable.ic_download,
         context.getString(R.string.notification_button),
-        getActionPendingIntent(context)
+        getActionPendingIntent(context, urls, status)
     ).build()
 
-    private fun getActionPendingIntent(context: Context) = PendingIntent.getActivity(
-        context,
-        NOTIFICATION_ID,
-        Intent(context, DetailActivity::class.java),
-        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-    )
+    private fun getActionPendingIntent(context: Context, urls: Urls, status: Int): PendingIntent {
+        val intent = Intent(context, DetailActivity::class.java).apply {
+            putExtra(EXTRA_URL, urls.ordinal)
+            putExtra(EXTRA_STATUS, status)
+        }
+        val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        return PendingIntent.getActivity(context, NOTIFICATION_ID, intent, flags)
+    }
 
     fun createChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

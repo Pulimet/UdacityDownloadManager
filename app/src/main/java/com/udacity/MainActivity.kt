@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (id == Downloader.downloadID && context != null) {
-                Notifications.showNotification(context, Downloader.downloadUrl)
+                val status = Downloader.getStatus(context, id)
+                Notifications.showNotification(context, Downloader.downloadUrl, status)
             }
         }
     }

@@ -4,8 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DetailActivity"
     tools:showIn="@layout/activity_detail">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <TextView
+        android:id="@+id/tvFileName"
+        style="@style/DetailsTitle"
+        android:layout_marginTop="32dp"
+        android:text="@string/file_name"
+        app:layout_constraintEnd_toEndOf="@id/center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFileNameValue"
+        style="@style/DetailsTitle"
+        android:layout_marginTop="32dp"
+        android:textColor="#111144"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/center"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/notification_title2" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        style="@style/DetailsTitle"
+        android:layout_marginTop="64dp"
+        android:text="@string/status"
+        app:layout_constraintEnd_toEndOf="@id/center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFileName" />
+
+    <TextView
+        android:id="@+id/tvStatusValue"
+        style="@style/DetailsTitle"
+        android:layout_marginTop="64dp"
+        android:textColor="#111144"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/center"
+        app:layout_constraintTop_toBottomOf="@id/tvFileName"
+        tools:text="Success" />
+
+    <Button
+        style="@style/DetailsButton"
+        android:text="@string/ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

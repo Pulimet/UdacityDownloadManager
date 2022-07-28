@@ -1,4 +1,4 @@
-package com.udacity
+package com.udacity.views
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.core.content.ContextCompat
+import com.udacity.ButtonState
+import com.udacity.R
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
