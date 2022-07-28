@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setViewBinding()
         setSupportActionBar(binding.toolbar)
         setupListeners()
-        if (savedInstanceState == null) {
-            showPleaseSelectToast()
-        }
     }
 
     override fun onResume() {
@@ -70,7 +67,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun download(url: String) {
-        binding.content.customButton.startLoadingAnimation()
         /*  val request =
               DownloadManager.Request(Uri.parse(URL))
                   .setTitle(getString(R.string.app_name))

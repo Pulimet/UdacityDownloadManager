@@ -50,19 +50,30 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { p, old, new ->
-
+        when (buttonState) {
+            ButtonState.Clicked -> {
+                isAnimated = true
+                startLoadingAnimation()
+            }
+            ButtonState.Loading -> {}
+            ButtonState.Completed -> {
+                isAnimated = false
+            }
+        }
     }
 
     init {
+        isClickable = true
         getDataFromAttributes(context, attrs)
         setPaintsValues()
-        startLoadingAnimation()
     }
 
-    fun startLoadingAnimation() {
-        if (isAnimated) return
-        isAnimated = true
+    override fun performClick(): Boolean {
+        if (!isAnimated) buttonState = ButtonState.Clicked
+        return super.performClick()
+    }
 
+    private fun startLoadingAnimation() {
         ValueAnimator.ofInt(0, 101).apply {
             startDelay = 500
             duration = 4000
@@ -70,11 +81,11 @@ class LoadingButton @JvmOverloads constructor(
             addUpdateListener { valueAnimator ->
                 animInitialValue = valueAnimator.animatedValue as Int
                 invalidate()
-                if (animatedValue == 101) isAnimated = false
+                if (animatedValue == 101) buttonState = ButtonState.Completed
             }
         }.start()
+        buttonState = ButtonState.Loading
     }
-
 
     private fun getDataFromAttributes(context: Context, attrs: AttributeSet?) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.LoadingButton, 0, 0).apply {
