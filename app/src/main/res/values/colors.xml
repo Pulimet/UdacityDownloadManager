@@ -5,4 +5,6 @@
     <color name="colorAccent">#F9A825</color>
     <color name="white">#FFFFFF</color>
     <color name="bg_top">#441177</color>
+    <color name="bg_anim">#005244</color>
+    <color name="arc">#FF9800</color>
 </resources>
