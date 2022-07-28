@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChe
     }
 
     private fun download() {
-        val request =
+      /*  val request =
             DownloadManager.Request(Uri.parse(URL))
                 .setTitle(getString(R.string.app_name))
                 .setDescription(getString(R.string.app_description))
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, RadioGroup.OnChe
                 .setAllowedOverRoaming(true)
 
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        downloadID = downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+        downloadID = downloadManager.enqueue(request)// enqueue puts the download request in the queue.*/
     }
 
     // View.OnClickListener
