@@ -10,7 +10,7 @@ import com.udacity.R
 enum class Urls(val url: String) {
     EMPTY(""),
     URL1("https://github.com/bumptech/glide/archive/master.zip"),
-    URL2("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zipppp"),
+    URL2("https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"),
     URL3("https://github.com/square/retrofit/archive/master.zip");
 
     companion object {

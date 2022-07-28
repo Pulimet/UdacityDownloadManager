@@ -1,13 +1,15 @@
 package com.udacity
 
 import android.app.DownloadManager
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.udacity.databinding.ActivityDetailBinding
 import com.udacity.utils.Notifications
 import com.udacity.utils.Urls
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityDetailBinding
     private var urlNum = 0
@@ -18,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         setViewBinding()
         setSupportActionBar(binding.toolbar)
         Notifications.cancelNotification(this)
+        binding.content.btnOk.setOnClickListener(this)
         getExtras()
         setFileName()
         setStatus()
@@ -49,5 +52,16 @@ class DetailActivity : AppCompatActivity() {
             else -> getString(R.string.failed)
         }
         binding.content.tvStatusValue.text = statusString
+    }
+
+    // View.OnClickListener
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btnOk -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
     }
 }
