@@ -17,6 +17,7 @@ class LoadingButton @JvmOverloads constructor(
         private const val RECT_PADDING = 30f
     }
 
+    private var isAnimated = false
     private var bgColor = Color.YELLOW
     private var textColor = Color.BLACK
     private var textSizeFloat = 70f
@@ -55,10 +56,13 @@ class LoadingButton @JvmOverloads constructor(
     init {
         getDataFromAttributes(context, attrs)
         setPaintsValues()
-        startLoadingAnimationNow()
+        startLoadingAnimation()
     }
 
-    private fun startLoadingAnimationNow() {
+    fun startLoadingAnimation() {
+        if (isAnimated) return
+        isAnimated = true
+
         ValueAnimator.ofInt(0, 101).apply {
             startDelay = 500
             duration = 4000
@@ -66,6 +70,7 @@ class LoadingButton @JvmOverloads constructor(
             addUpdateListener { valueAnimator ->
                 animInitialValue = valueAnimator.animatedValue as Int
                 invalidate()
+                if (animatedValue == 101) isAnimated = false
             }
         }.start()
     }
@@ -133,14 +138,21 @@ class LoadingButton @JvmOverloads constructor(
             101 -> btnCurrentText = btnRegularText
         }
         if (animInitialValue in 1..100) {
-            bgRectAnim.right = widthSize * animInitialValue / 100
-            drawRect(bgRectAnim, bgAnimPaint)
-            val sweepAngle = 360f * animInitialValue / 100
-
-            arcRect.left = hCenter + textBound.width() / 2 + RECT_PADDING * 2
-            arcRect.right = arcRect.left +  heightSize.toFloat() - RECT_PADDING * 2
-            drawArc(arcRect, 0f, sweepAngle, true, arcPaint)
+            drawProgressRect()
+            drawProgressArc()
         }
+    }
+
+    private fun Canvas.drawProgressRect() {
+        bgRectAnim.right = widthSize * animInitialValue / 100
+        drawRect(bgRectAnim, bgAnimPaint)
+    }
+
+    private fun Canvas.drawProgressArc() {
+        val sweepAngle = 360f * animInitialValue / 100
+        arcRect.left = hCenter + textBound.width() / 2 + RECT_PADDING * 2
+        arcRect.right = arcRect.left + heightSize.toFloat() - RECT_PADDING * 2
+        drawArc(arcRect, 0f, sweepAngle, true, arcPaint)
     }
 
     private fun Canvas.drawInitialText() {
