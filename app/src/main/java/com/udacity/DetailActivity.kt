@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.udacity.databinding.ActivityDetailBinding
 import com.udacity.utils.Notifications
 import com.udacity.utils.Urls
+import kotlinx.coroutines.delay
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,6 +26,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         getExtras()
         setFileName()
         setStatus()
+        launchAnimation()
     }
 
     private fun setViewBinding() {
@@ -53,6 +56,17 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
         binding.content.tvStatusValue.text = statusString
     }
+
+    private fun launchAnimation() {
+        lifecycleScope.launchWhenResumed {
+            binding.content.motion.apply {
+                delay(500)
+                transitionToStart()
+                transitionToState(R.id.end, 500)
+            }
+        }
+    }
+
 
     // View.OnClickListener
 
